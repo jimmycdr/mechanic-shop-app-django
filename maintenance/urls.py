@@ -12,7 +12,11 @@ router.register(r'vehicles', views.VehicleViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('maintenance-order', views.createMaintenanceOrder),
-    path('maintenance-order-operations', views.MaintenanceCustomView.as_view()),
-    path('set-mechanic-for-maintenance-order', views.setMechanicForMaintenanceOrder),
+    path('maintenance-order', views.MaintenanceCustomView.as_view()),
+    path('maintenance-order/create', views.createMaintenanceOrder),
+    path('maintenance-order/assign-mechanic', views.setMechanicForMaintenanceOrder),
+    path('maintenance-order/<int:order_id>/update', views.updateMaintenanceOrder),
+    path('task', views.TaskCustomView.as_view()),
+    path('task/create', views.createTask),
+    path('task/change-status', views.updateTaskStatus),
 ]
