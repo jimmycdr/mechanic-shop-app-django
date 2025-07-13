@@ -7,6 +7,13 @@ class StatusOrder(models.TextChoices):
     IN_PROGRESS = 'in_progress', 'In Progress'
     COMPLETED = 'completed', 'Completed'
     CANCELLED = 'cancelled', 'Cancelled'
+
+class StatusTask(models.TextChoices):
+    PENDING = 'pending', 'Pending'
+    IN_PROGRESS = 'in_progress', 'In Progress'
+    COMPLETED = 'completed', 'Completed'
+    CANCELLED = 'cancelled', 'Cancelled'
+    REJECTED = 'rejected', 'Rejected'
     
 class TaskType(models.TextChoices):
     PREVENTIVE = 'preventive', 'Preventive'
@@ -62,7 +69,7 @@ class Vehicle(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     model = models.ForeignKey(VehicleModel, on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=10, unique=True, validators=[validate_bolivia_license_plate])
-    vin = models.CharField(max_length=17, unique=True, validators=[validate_vin])
+    vin = models.CharField(max_length=17, unique=True, blank=True, null=True, validators=[validate_vin])
     year = models.PositiveIntegerField(validators=[validate_vehicle_year])
     color = models.CharField(max_length=30)
     kilometers = models.PositiveIntegerField(default=0)
@@ -93,6 +100,7 @@ class Task(models.Model):
     task_type = models.CharField(max_length=20, choices=TaskType.choices)
     duration_hours = models.DecimalField(decimal_places=2, max_digits=4)
     cost = models.DecimalField(decimal_places=2, max_digits=10)
+    status = models.CharField(max_length=20, choices=StatusTask.choices, default=StatusTask.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
