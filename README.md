@@ -9,7 +9,7 @@ Desarrollado con **Django** y **Django REST Framework**.
 
 ```bash
 git clone https://github.com/jimmycdr/mechanic-shop-app-django.git
-cd mechanic-shop-app
+cd mechanic-shop-app-django
 ```
 2. Instala las dependencias:
 
@@ -29,5 +29,5 @@ python manage.py runserver
 ## Cargar Datos iniciales:
 
 ```bash
-python manage.py loaddata dump_maintenance.json
+python manage.py loaddata dump_maintenance
 ```
